@@ -5,12 +5,10 @@ FROM php:8.2-fpm
 RUN apt-get update && apt-get install -y \
     unzip \
     git \
-    libzip-dev \  # Ensure libzip is installed
+    libzip-dev \
     libpq-dev \
-    libpng-dev
-
-# Install PHP extensions
-RUN docker-php-ext-configure zip \
+    libpng-dev \
+    && docker-php-ext-configure zip \
     && docker-php-ext-install pdo pdo_mysql zip gd
 
 # Set working directory
