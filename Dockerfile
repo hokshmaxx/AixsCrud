@@ -1,37 +1,30 @@
-# Use the official PHP image with Apache
-FROM php:8.2-apache
+# Use an official PHP runtime
+FROM php:8.2-fpm
 
-# Install system dependencies
+# Install required system dependencies
 RUN apt-get update && apt-get install -y \
     unzip \
     git \
+    libzip-dev \  # Ensure libzip is installed
     libpq-dev \
-    libpng-dev \
-    libzip-dev \
-    && docker-php-ext-install pdo pdo_mysql zip gd
+    libpng-dev
 
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Install PHP extensions
+RUN docker-php-ext-configure zip \
+    && docker-php-ext-install pdo pdo_mysql zip gd
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy application files
+# Copy Laravel files
 COPY . .
 
 # Install Composer dependencies
-RUN composer install --optimize-autoloader --no-dev
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN composer install --no-dev --optimize-autoloader
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
-# Expose port
-ENV PORT 8080
+# Expose Cloud Run's expected port
 EXPOSE 8080
 
-# Configure Apache to use the PORT environment variable
-RUN sed -i "s/Listen 80/Listen ${PORT}/g" /etc/apache2/ports.conf
-RUN sed -i "s/:80/:${PORT}/g" /etc/apache2/sites-available/000-default.conf
-
-# Start Apache
-CMD ["apache2-foreground"]
+# Start Laravel using PHP-FPM
+CMD ["php-fpm"]
