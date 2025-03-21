@@ -15,8 +15,8 @@ It follows the **Domain-Driven Design (DDD)** approach and includes an **HTTP AP
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repo.git
-   cd your-repo
+   git clone https://github.com/hokshmaxx/AixsCrud.git
+   cd AixsCrud
    ```
 
 2. Install dependencies:
