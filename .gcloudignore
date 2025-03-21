@@ -1,5 +1,4 @@
-.git
 node_modules
-vendor
-storage/logs
-.env
+npm-debug.log
+docker-compose.yml
+.DS_Store

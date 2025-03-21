@@ -1,6 +1,6 @@
 <?php
 
-namespace App\domains\Posts\Controllers;
+namespace App\Domains\Posts\Controllers;
 use App\Http\Controllers\Controller;
 use App\Domains\Posts\Services\PostService;
 use App\Domains\Posts\DTOs\PostDTO;

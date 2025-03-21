@@ -17,4 +17,9 @@ require __DIR__.'/../vendor/autoload.php';
 /** @var Application $app */
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
+
 $app->handleRequest(Request::capture());
+$port =  8080;
+$host = '0.0.0.0';
+echo "Server running on http://{$host}:{$port}\n";
+exec("php -S {$host}:{$port} -t public");

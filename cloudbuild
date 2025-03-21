@@ -1,0 +1,15 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/abber-85565/aixscrud", "."]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/abber-85565/aixscrud"]
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: [
+      "run", "deploy", "aixscrud",
+      "--image", "gcr.io/abber-85565/aixscrud",
+      "--platform", "managed",
+      "--region", "us-central1",
+      "--allow-unauthenticated"
+    ]
+images:
+  - "gcr.io/abber-85565/aixscrud"
