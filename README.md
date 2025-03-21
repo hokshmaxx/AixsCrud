@@ -11,6 +11,15 @@ It follows the **Domain-Driven Design (DDD)** approach and includes an **HTTP AP
 - Provides an **HTTP API** to interact with posts.
 - No authentication or authorization, as this is a simple test project.
 
+## Images 
+
+![get all posts](imgs/all.png)
+![create post](imgs/create.png)
+![update](imgs/update.png)
+![delete](imgs/delete.png)
+
+
+
 ## Installation
 
 1. Clone the repository:
